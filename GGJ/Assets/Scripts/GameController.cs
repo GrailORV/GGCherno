@@ -44,8 +44,9 @@ public class GameController : MonoBehaviour {
     private void Start()
     {
         velGame = 0.08f;
-        score = 2456;
+        score = 2456563;
         life = lifeMax;
+        combo = 365;
     }
 
     // Update is called once per frame
@@ -63,18 +64,18 @@ public class GameController : MonoBehaviour {
 
     void UpdateUI()
     {
-        scoreNumbers[0].sprite = Numbers[score / 100000000];
-        scoreNumbers[1].sprite = Numbers[score % 10000000 / 1000000];
-        scoreNumbers[2].sprite = Numbers[score % 1000000 / 100000];
-        scoreNumbers[3].sprite = Numbers[score % 100000 / 10000];
-        scoreNumbers[4].sprite = Numbers[score % 10000 / 1000];
-        scoreNumbers[5].sprite = Numbers[score % 1000 / 100];
-        scoreNumbers[6].sprite = Numbers[score % 100 / 10];
-        scoreNumbers[7].sprite = Numbers[score % 10 / 1];
+        scoreNumbers[7].sprite = Numbers[score / 100000000];
+        scoreNumbers[6].sprite = Numbers[score % 10000000 / 1000000];
+        scoreNumbers[5].sprite = Numbers[score % 1000000 / 100000];
+        scoreNumbers[4].sprite = Numbers[score % 100000 / 10000];
+        scoreNumbers[3].sprite = Numbers[score % 10000 / 1000];
+        scoreNumbers[2].sprite = Numbers[score % 1000 / 100];
+        scoreNumbers[1].sprite = Numbers[score % 100 / 10];
+        scoreNumbers[0].sprite = Numbers[score % 10 / 1];
 
-        comboNumbers[0].sprite = Numbers[score % 1000 / 100];
-        comboNumbers[1].sprite = Numbers[score % 100 / 10];
-        comboNumbers[2].sprite = Numbers[score % 10 / 1];
+        comboNumbers[2].sprite = Numbers[combo % 1000 / 100];
+        comboNumbers[1].sprite = Numbers[combo % 100 / 10];
+        comboNumbers[0].sprite = Numbers[combo % 10 / 1];
     }
 
     public void AddLife()
