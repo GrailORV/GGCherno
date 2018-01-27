@@ -1,8 +1,8 @@
-/GGJ/Library/
-/GGJ/Temp/
-/GGJ/Obj/
-/GGJ/Build/
-/GGJ/Builds/
+/GGJ/[Ll]ibrary/
+/GGJ/[Tt]emp/
+/GGJ/[Oo]bj/
+/GGJ/[Bb]uild/
+/GGJ/[Bb]uilds/
 
 # Visual Studio 2015 cache directory
 /GGJ/.vs/
@@ -33,3 +33,4 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+GGJ/GGJ.VC.db
