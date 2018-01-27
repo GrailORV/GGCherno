@@ -26,12 +26,21 @@ public class TitleController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (fade.Status != Fade.FADE_STATUS.FADE_NONE)
+        {
+            return;
+        }
+
         ChooseOption();
- 
     }
 
     public void LoadGame()
     {
+        if (fade.Status != Fade.FADE_STATUS.FADE_NONE)
+        {
+            return;
+        }
+
         fade.Start(Fade.FADE_STATUS.FADE_OUT, 1.0f, "Game");
     }
 
