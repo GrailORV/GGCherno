@@ -19,6 +19,8 @@ public class TitleController : MonoBehaviour
         operate = false;
         selector = 0;
         button[selector].Select();
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<SoundController>().Play(SoundController.BGM.BGM_0);
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<SoundController>().Play(SoundController.SOUNDS.SOUND_0);
     }
 
     // Update is called once per frame
