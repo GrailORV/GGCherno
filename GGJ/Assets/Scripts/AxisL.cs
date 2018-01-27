@@ -44,7 +44,7 @@ public class AxisL : MonoBehaviour {
                 else i++;
             }
         }
-        else if (Input.GetAxis("VerticalL") > -0.2F && Input.GetAxis("VerticalL") < 0)
+        else if (Input.GetAxis("VerticalL") >= -0.2f)
             suelta = true;
     }
 }

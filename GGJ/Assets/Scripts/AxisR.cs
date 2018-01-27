@@ -43,7 +43,7 @@ public class AxisR : MonoBehaviour {
                 else i++;
             }   
         }
-        else if (Input.GetAxis("VerticalR") > -0.2F && Input.GetAxis("VerticalR") < 0)
+        else if (Input.GetAxis("VerticalR") >= -0.2f)
             suelta = true;
     }
 }
