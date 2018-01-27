@@ -44,9 +44,9 @@ public class GameController : MonoBehaviour {
     private void Start()
     {
         velGame = 0.08f;
-        score = 2456563;
+        score = 0;
         life = lifeMax;
-        combo = 365;
+        combo = 0;
     }
 
     // Update is called once per frame

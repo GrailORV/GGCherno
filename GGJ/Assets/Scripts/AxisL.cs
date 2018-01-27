@@ -11,7 +11,9 @@ public class AxisL : MonoBehaviour {
     const int cantBullet = 15;
     GameObject[] bullets;
 
-    // Use this for initialization
+    [SerializeField]
+    private GameObject cannonDirecction;
+    
     void Start()
     {
         suelta = true;
@@ -35,10 +37,12 @@ public class AxisL : MonoBehaviour {
                 if (!bullets[i].activeSelf)
                 {
                     bullets[i].SetActive(true);
-                    bullets[i].transform.position = gameObject.transform.position;
-                    bullets[i].transform.rotation = Quaternion.Euler(0, 0, Input.GetAxis("HorizontalL") * 90);
+                    bullets[i].transform.position = gameObject.transform.position + new Vector3(0, 0, 1);
+                    float tita = Mathf.Atan2(Input.GetAxis("HorizontalL"), -Input.GetAxis("VerticalL")) * 180 / Mathf.PI;
+                    bullets[i].transform.rotation = Quaternion.Euler(0, 0, tita);
                     bullets[i].GetComponent<Rigidbody2D>().AddForce(new Vector2(-Input.GetAxis("HorizontalL"), -Input.GetAxis("VerticalL")) * 50.0f, ForceMode2D.Impulse);
                     suelta = false;
+                    cannonDirecction.transform.localRotation = Quaternion.Euler(0, -tita, 0);
                     break;
                 }
                 else i++;

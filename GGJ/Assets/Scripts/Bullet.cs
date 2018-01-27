@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour {
 	}
 	
 	void Update () {
-		
+        transform.Rotate(new Vector3(0,12f,0));
 	}
 
     private void OnTriggerExit2D(Collider2D collision)
