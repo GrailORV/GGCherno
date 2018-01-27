@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class TitleController : MonoBehaviour
 {
+    [SerializeField]
+    Fade fade;
 
     private int selector;
     private bool operate;
@@ -32,7 +34,7 @@ public class TitleController : MonoBehaviour
 
     public void LoadGame()
     {
-        SceneManager.LoadScene("Game");
+        fade.Start(Fade.FADE_STATUS.FADE_OUT, 1.0f, "Game");
     }
 
     private void ChooseOption()
@@ -68,8 +70,4 @@ public class TitleController : MonoBehaviour
         }
     }
 
-    private void DecideOption()
-    {
-
-    }
 }
