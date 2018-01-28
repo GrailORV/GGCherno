@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class PrologueController : MonoBehaviour
-{
+public class EpilogueController : MonoBehaviour {
+
     [SerializeField]
     Fade fade;
 
@@ -91,7 +91,7 @@ public class PrologueController : MonoBehaviour
             section++;
             if (section >= prologueTextList.Length)
             {
-                fade.Start(Fade.FADE_STATUS.FADE_OUT, 1.0f, "Game");
+                fade.Start(Fade.FADE_STATUS.FADE_OUT, 1.0f, "Title");
             }
         }
         else if (Input.GetAxis("Submit") < 0.2f && !pushEnabled)
@@ -102,7 +102,7 @@ public class PrologueController : MonoBehaviour
 
         if (Input.GetAxis("Cancel") > 0.9f)
         {
-            fade.Start(Fade.FADE_STATUS.FADE_OUT, 1.0f, "Game");
+            fade.Start(Fade.FADE_STATUS.FADE_OUT, 1.0f, "Title");
         }
 
         if (Input.GetAxis("Options") > 0.9f)
@@ -113,14 +113,14 @@ public class PrologueController : MonoBehaviour
 
     public void SkipStory()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Title");
     }
 
     public void ReadStory()
     {
         fade.Start(Fade.FADE_STATUS.FADE_IN, 1.0f);
         skipLog.gameObject.SetActive(false);
-        foreach(var b in button)
+        foreach (var b in button)
         {
             b.interactable = false;
         }
