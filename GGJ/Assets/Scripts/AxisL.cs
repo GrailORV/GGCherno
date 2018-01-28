@@ -36,6 +36,7 @@ public class AxisL : MonoBehaviour {
             {
                 if (!bullets[i].activeSelf)
                 {
+                    GameObject.FindGameObjectWithTag("AudioController").GetComponent<SoundController>().Play(SoundController.SOUNDS.SOUND_BULLET);
                     bullets[i].SetActive(true);
                     bullets[i].transform.position = gameObject.transform.position + new Vector3(0, 0, 1);
                     float tita = Mathf.Atan2(Input.GetAxis("HorizontalL"), -Input.GetAxis("VerticalL")) * 180 / Mathf.PI;

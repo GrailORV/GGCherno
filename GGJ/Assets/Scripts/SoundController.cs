@@ -11,6 +11,9 @@ public class SoundController : MonoBehaviour {
         SOUND_HSCORE,
         SOUND_EXPLOSION,
         SOUND_BULLET,
+        SOUND_BOSSEXPLO,
+        SOUND_TITLESELECT,
+        SOUND_TITLETEXT
     }
 
     public enum BGM
@@ -20,6 +23,8 @@ public class SoundController : MonoBehaviour {
         BGM_BOSS,
         BGM_GO,
         BGM_STORY,
+        BGM_SCORE,
+        BGM_EPILOGUE,
     }
 
     [SerializeField]

@@ -96,8 +96,14 @@ public class GameController : MonoBehaviour {
         life--;
         if (life <= 0)
         {
-            SceneManager.LoadScene("Score");
-            soundCon.StopBGM();
+            
         }
+    }
+
+    void SceneScore()
+    {
+        SceneManager.LoadScene("Score");
+        soundCon.StopBGM();
+        PlayerPrefs.SetInt("Score", score);
     }
 }
