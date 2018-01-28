@@ -13,6 +13,13 @@ public class Enemycontroller : MonoBehaviour {
     int nowPattern;
     int ContSpawns;
     int pauseTimer;
+    float realTime;
+    [SerializeField]
+    private GameObject wall;
+    private GameObject[] walls;
+    SoundController soundCon;
+
+    bool bossState;
 
     void Start()
     {
@@ -26,16 +33,38 @@ public class Enemycontroller : MonoBehaviour {
         timeSpawnEnemy = 20;
         timerSpawn = 0;
         pauseTimer = 300;
+        realTime = 0;
+        soundCon = GameObject.FindGameObjectWithTag("AudioController").GetComponent<SoundController>();
+        bossState = false;
+        walls = new GameObject[3];
     }
 
     private void Update()
     {
+        realTime += Time.deltaTime;
+        if(realTime >= 180 && !bossState)
+        {
+            soundCon.Play(SoundController.BGM.BGM_BOSS);
+            walls[0] = Instantiate(wall, new Vector2(-2.5f, 0), Quaternion.identity);
+            walls[1] = Instantiate(wall, new Vector2(0, 4.65f), Quaternion.Euler(0,0,90));
+            walls[2] = Instantiate(wall, new Vector2(2.5f, 0), Quaternion.identity);
+            walls[0].GetComponent<Wall>().StopMoveWall(new Vector2(-2.5f, 3.5f));
+            walls[1].GetComponent<Wall>().StopMoveWall(new Vector2(-0.8f, 4.65f));
+            walls[2].GetComponent<Wall>().StopMoveWall(new Vector2(2.5f, 3.5f));
+            bossState = true;
+        }
+        if (realTime > 180)
+        {
+
+            return;
+        }
         if (pauseTimer <= 0)
         {
             if (timeSpawnEnemy == timerSpawn)
             {
                 Enemies[ContSpawns].SetActive(true);
                 Enemies[ContSpawns].GetComponent<Animator>().SetInteger("Pattern", nowPattern);
+                Enemies[ContSpawns].GetComponent<Animator>().SetBool("Anim", false);
                 ContSpawns++;
                 if (ContSpawns == countEnemy)
                 {

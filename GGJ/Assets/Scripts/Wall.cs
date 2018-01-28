@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Wall : MonoBehaviour {
 
+    [SerializeField]
+    GameObject[] aspas;
+
     public bool stop;
     public Vector2 targetPos;
     private float factor;
@@ -14,7 +17,7 @@ public class Wall : MonoBehaviour {
     void Start () {
         factor = 1.1f;
         speed = 2.0f;
-        stop = true;
+        stop = false;
     }
 	
 	void Update () {
@@ -35,6 +38,10 @@ public class Wall : MonoBehaviour {
         {
             factor += (speed * Time.deltaTime) / distance;
             transform.position = Vector2.Lerp(initPos, targetPos, factor);
+        }
+        for(int i = 0; i < aspas.Length;i++)
+        {
+            aspas[i].transform.Rotate(new Vector3(0,0,20));
         }
     }
 

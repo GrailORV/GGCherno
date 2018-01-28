@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
@@ -25,6 +26,7 @@ public class GameController : MonoBehaviour {
     [SerializeField]
     private Image[] comboNumbers;
 
+    SoundController soundCon;
 
     // Use this for initialization
     void Awake () {
@@ -47,6 +49,8 @@ public class GameController : MonoBehaviour {
         score = 0;
         life = lifeMax;
         combo = 0;
+        soundCon = GameObject.FindGameObjectWithTag("AudioController").GetComponent<SoundController>();
+        soundCon.Play(SoundController.BGM.BGM_BATTLE);
     }
 
     // Update is called once per frame
@@ -90,5 +94,10 @@ public class GameController : MonoBehaviour {
     {
         lifeCount[life - 1].gameObject.SetActive(false);
         life--;
+        if (life <= 0)
+        {
+            SceneManager.LoadScene("Score");
+            soundCon.StopBGM();
+        }
     }
 }

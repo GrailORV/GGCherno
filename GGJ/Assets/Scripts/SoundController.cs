@@ -6,12 +6,20 @@ public class SoundController : MonoBehaviour {
 
     public enum SOUNDS
     {
-        SOUND_0 = 0,
+        SOUND_DICISION = 0,
+        SOUND_SELECT,
+        SOUND_HSCORE,
+        SOUND_EXPLOSION,
+        SOUND_BULLET,
     }
 
     public enum BGM
     {
-        BGM_0 = 0,
+        BGM_TITLE = 0,
+        BGM_BATTLE,
+        BGM_BOSS,
+        BGM_GO,
+        BGM_STORY,
     }
 
     [SerializeField]
@@ -51,7 +59,7 @@ public class SoundController : MonoBehaviour {
         audio.Play();
     }
 
-    public void StopBGM(BGM b)
+    public void StopBGM()
     {
         audio.Stop();
     }
