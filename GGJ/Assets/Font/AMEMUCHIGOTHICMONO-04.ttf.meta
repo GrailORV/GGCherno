@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 77d5140d0d0810949bbbe70c7715ae21
+timeCreated: 1517062199
+licenseType: Pro
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: AMEMUCHIGOTHICMONO-04
+  fontNames:
+  - AMEMUCHIGOTHICMONO-04
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
