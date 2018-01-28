@@ -27,6 +27,7 @@ public class TitleController : MonoBehaviour
     private Vector3 titleLeftPosEnd, titleRightPosEnd, titleBottomPosEnd;
     private int animNum = 0;
     private float count = 0.0f;
+    SoundController soundCon;
 
     // Use this for initialization
     void Start()
@@ -49,6 +50,9 @@ public class TitleController : MonoBehaviour
         operate = false;
         selector = 0;
         button[selector].Select();
+        soundCon = GameObject.FindGameObjectWithTag("AudioController").GetComponent<SoundController>();
+        soundCon.Play(SoundController.BGM.BGM_TITLE);
+        soundCon.SetVolume(0.2f);
     }
 
     // Update is called once per frame
@@ -91,6 +95,7 @@ public class TitleController : MonoBehaviour
 
     public void LoadGame()
     {
+        soundCon.Play(SoundController.SOUNDS.SOUND_SELECT);
         if (fade.Status != Fade.FADE_STATUS.FADE_NONE)
         {
             return;
@@ -103,6 +108,7 @@ public class TitleController : MonoBehaviour
     {
         if (Input.GetAxis("SelectRight") > 0.8f && !operate)
         {
+            soundCon.Play(SoundController.SOUNDS.SOUND_TITLESELECT);
             button[selector].gameObject.SetActive(false);
             selector++;
             if (selector >= button.Length)
@@ -115,6 +121,7 @@ public class TitleController : MonoBehaviour
         }
         if (Input.GetAxis("SelectRight") < -0.8f && !operate)
         {
+            soundCon.Play(SoundController.SOUNDS.SOUND_TITLESELECT);
             button[selector].gameObject.SetActive(false);
             selector--;
             if (selector < 0)

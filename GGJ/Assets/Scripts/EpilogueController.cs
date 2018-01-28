@@ -35,6 +35,7 @@ public class EpilogueController : MonoBehaviour {
         button[selector].Select();
         pushEnabled = false;
         LoadPrologueText();
+        GameObject.FindGameObjectWithTag("AudioController").GetComponent<SoundController>().Play(SoundController.BGM.BGM_EPILOGUE);
     }
 
     // Update is called once per frame
@@ -47,6 +48,7 @@ public class EpilogueController : MonoBehaviour {
 
         if (Input.GetAxis("SelectRight") > 0.8f && !operate)
         {
+
             selector++;
             if (selector >= button.Length)
             {
@@ -87,6 +89,7 @@ public class EpilogueController : MonoBehaviour {
 
         if (Input.GetAxis("Submit") > 0.9f && pushEnabled)
         {
+            GameObject.FindGameObjectWithTag("AudioController").GetComponent<SoundController>().Play(SoundController.SOUNDS.SOUND_TITLETEXT);
             pushEnabled = false;
             section++;
             if (section >= prologueTextList.Length)
@@ -102,11 +105,13 @@ public class EpilogueController : MonoBehaviour {
 
         if (Input.GetAxis("Cancel") > 0.9f)
         {
+            GameObject.FindGameObjectWithTag("AudioController").GetComponent<SoundController>().Play(SoundController.SOUNDS.SOUND_SELECT);
             fade.Start(Fade.FADE_STATUS.FADE_OUT, 1.0f, "Title");
         }
 
         if (Input.GetAxis("Options") > 0.9f)
         {
+            GameObject.FindGameObjectWithTag("AudioController").GetComponent<SoundController>().Play(SoundController.SOUNDS.SOUND_SELECT);
             fade.Start(Fade.FADE_STATUS.FADE_OUT, 1.0f, "Title");
         }
     }

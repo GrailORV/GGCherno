@@ -35,6 +35,8 @@ public class PrologueController : MonoBehaviour
         button[selector].Select();
         pushEnabled = false;
         LoadPrologueText();
+        GameObject.FindGameObjectWithTag("AudioController").GetComponent<SoundController>().Play(SoundController.BGM.BGM_STORY);
+        GameObject.FindGameObjectWithTag("AudioController").GetComponent<SoundController>().SetVolume(0.2f);
     }
 
     // Update is called once per frame
@@ -47,6 +49,7 @@ public class PrologueController : MonoBehaviour
 
         if (Input.GetAxis("SelectRight") > 0.8f && !operate)
         {
+            GameObject.FindGameObjectWithTag("AudioController").GetComponent<SoundController>().Play(SoundController.SOUNDS.SOUND_TITLESELECT);
             selector++;
             if (selector >= button.Length)
             {
@@ -57,6 +60,7 @@ public class PrologueController : MonoBehaviour
         }
         if (Input.GetAxis("SelectRight") < -0.8f && !operate)
         {
+            GameObject.FindGameObjectWithTag("AudioController").GetComponent<SoundController>().Play(SoundController.SOUNDS.SOUND_TITLESELECT);
             selector--;
             if (selector < 0)
             {
@@ -87,6 +91,7 @@ public class PrologueController : MonoBehaviour
 
         if (Input.GetAxis("Submit") > 0.9f && pushEnabled)
         {
+            GameObject.FindGameObjectWithTag("AudioController").GetComponent<SoundController>().Play(SoundController.SOUNDS.SOUND_TITLETEXT);
             pushEnabled = false;
             section++;
             if (section >= prologueTextList.Length)
@@ -103,10 +108,12 @@ public class PrologueController : MonoBehaviour
         if (Input.GetAxis("Cancel") > 0.9f)
         {
             fade.Start(Fade.FADE_STATUS.FADE_OUT, 1.0f, "Game");
+            GameObject.FindGameObjectWithTag("AudioController").GetComponent<SoundController>().Play(SoundController.SOUNDS.SOUND_SELECT);
         }
 
         if (Input.GetAxis("Options") > 0.9f)
         {
+            GameObject.FindGameObjectWithTag("AudioController").GetComponent<SoundController>().Play(SoundController.SOUNDS.SOUND_SELECT);
             fade.Start(Fade.FADE_STATUS.FADE_OUT, 1.0f, "Title");
         }
     }

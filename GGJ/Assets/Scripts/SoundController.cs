@@ -68,4 +68,9 @@ public class SoundController : MonoBehaviour {
     {
         audio.Stop();
     }
+
+    public void SetVolume(float a)
+    {
+        audio.volume = a;
+    }
 }

@@ -51,6 +51,7 @@ public class GameController : MonoBehaviour {
         combo = 0;
         soundCon = GameObject.FindGameObjectWithTag("AudioController").GetComponent<SoundController>();
         soundCon.Play(SoundController.BGM.BGM_BATTLE);
+        soundCon.SetVolume(1.0f);
     }
 
     // Update is called once per frame
