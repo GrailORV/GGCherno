@@ -20,10 +20,15 @@ public class Fade : MonoBehaviour
         FADE_MAX
     };
 
-
+    private FADE_STATUS mystatus;
+    public FADE_STATUS Status
+    {
+        set { this.mystatus = value; }
+        get { return this.mystatus; }
+    }
 
     private string nextSceneName;
-    private FADE_STATUS mystatus;
+    
     private float fadetime;
     private float currentTime;
 

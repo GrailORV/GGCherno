@@ -64,7 +64,6 @@ public class GameController : MonoBehaviour {
 
     void UpdateUI()
     {
-        scoreNumbers[7].sprite = Numbers[score / 100000000];
         scoreNumbers[6].sprite = Numbers[score % 10000000 / 1000000];
         scoreNumbers[5].sprite = Numbers[score % 1000000 / 100000];
         scoreNumbers[4].sprite = Numbers[score % 100000 / 10000];

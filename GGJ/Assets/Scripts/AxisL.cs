@@ -8,7 +8,7 @@ public class AxisL : MonoBehaviour {
     private GameObject bullet;
 
     bool suelta;
-    const int cantBullet = 15;
+    const int cantBullet = 6;
     GameObject[] bullets;
 
     [SerializeField]
