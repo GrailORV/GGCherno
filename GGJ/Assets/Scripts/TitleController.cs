@@ -41,7 +41,7 @@ public class TitleController : MonoBehaviour
             return;
         }
 
-        fade.Start(Fade.FADE_STATUS.FADE_OUT, 1.0f, "Game");
+        fade.Start(Fade.FADE_STATUS.FADE_OUT, 1.0f, "Prologue");
     }
 
     private void ChooseOption()
