@@ -12,9 +12,13 @@ public class Fade : MonoBehaviour
     [SerializeField]
     private float sceneStartFadeTime;
 
+    [SerializeField]
+    private bool FadeAtLoadSceneEnabled = true;
+
     public enum FADE_STATUS
     {
         FADE_NONE,
+        FADE_WAIT,
         FADE_IN,
         FADE_OUT,
         FADE_MAX
@@ -28,7 +32,7 @@ public class Fade : MonoBehaviour
     }
 
     private string nextSceneName;
-    
+
     private float fadetime;
     private float currentTime;
 
@@ -36,7 +40,11 @@ public class Fade : MonoBehaviour
     void Start()
     {
         nextSceneName = null;
-        Start(FADE_STATUS.FADE_IN, sceneStartFadeTime);
+        mystatus = FADE_STATUS.FADE_WAIT;
+        if (FadeAtLoadSceneEnabled)
+        {
+            Start(FADE_STATUS.FADE_IN, sceneStartFadeTime);
+        }
     }
 
     // Update is called once per frame
