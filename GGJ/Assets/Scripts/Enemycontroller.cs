@@ -1,13 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Enemycontroller : MonoBehaviour {
 
     [SerializeField]
     private GameObject prefEnemy;
+    [SerializeField]
+    private GameObject prefEnemyBoss;
     const int countEnemy = 12;
     GameObject[] Enemies;
+    GameObject EnemyBoss;
     int timeSpawnEnemy;
     int timerSpawn;
     int nowPattern;
@@ -20,6 +24,10 @@ public class Enemycontroller : MonoBehaviour {
     SoundController soundCon;
 
     bool bossState;
+
+
+    private const int COMBO_TIME = 180;
+    private static int ComboTimeCnt;
 
     void Start()
     {
@@ -37,30 +45,55 @@ public class Enemycontroller : MonoBehaviour {
         soundCon = GameObject.FindGameObjectWithTag("AudioController").GetComponent<SoundController>();
         bossState = false;
         walls = new GameObject[3];
+
+        ComboTimeCnt = 0;
     }
 
     private void Update()
     {
-        realTime += Time.deltaTime;
-        if(realTime >= 180 && !bossState)
+        //コンボ
+        ComboTimeCnt++;
+        if(ComboTimeCnt>=COMBO_TIME)
         {
-            soundCon.Play(SoundController.BGM.BGM_BOSS);
-            walls[0] = Instantiate(wall, new Vector2(-2.5f, 0), Quaternion.identity);
-            walls[1] = Instantiate(wall, new Vector2(0, 4.65f), Quaternion.Euler(0,0,90));
-            walls[2] = Instantiate(wall, new Vector2(2.5f, 0), Quaternion.identity);
-            walls[0].GetComponent<Wall>().StopMoveWall(new Vector2(-2.5f, 3.5f));
-            walls[1].GetComponent<Wall>().StopMoveWall(new Vector2(-0.8f, 4.65f));
-            walls[2].GetComponent<Wall>().StopMoveWall(new Vector2(2.5f, 3.5f));
-            bossState = true;
+            GameObject gameController = GameObject.FindGameObjectWithTag("GameController");
+
+            gameController.GetComponent<GameController>().combo = 0;
+
         }
-        if (realTime > 180)
+
+        realTime += Time.deltaTime;
+        if(realTime >= 30 && !bossState)
         {
 
+            soundCon.Play(SoundController.BGM.BGM_BOSS);
+            walls[0] = Instantiate(wall, new Vector2(-2.5f, 0), Quaternion.identity);
+            walls[1] = Instantiate(wall, new Vector2(0, 4.65f), Quaternion.Euler(0, 0, 90));
+            walls[2] = Instantiate(wall, new Vector2(2.5f, 0), Quaternion.identity);
+            walls[0].GetComponent<Wall>().StopMoveWall(new Vector2(-2.5f, 1.5f));
+            walls[1].GetComponent<Wall>().StopMoveWall(new Vector2(-0.3f, 4.65f));
+            walls[2].GetComponent<Wall>().StopMoveWall(new Vector2(2.5f, 1.5f));
+
+            //EnemyBoss = Instantiate(prefEnemyBoss, new Vector2(0, 0), Quaternion.identity);
+
+            bossState = true;
+            timeSpawnEnemy = 10;
+            pauseTimer = 50;
+            for (int i = 0; i < Enemies.Length; i++)
+            {
+                Enemies[i].GetComponent<Animator>().speed = 2;
+            }
+
+        }
+        if (realTime > 60)
+        {
+            //終了処理
+            SceneManager.LoadScene("Score");
+            PlayerPrefs.SetInt("Score", GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().score);
             return;
         }
         if (pauseTimer <= 0)
         {
-            if (timeSpawnEnemy == timerSpawn)
+            if (timerSpawn >= timeSpawnEnemy)
             {
                 Enemies[ContSpawns].SetActive(true);
                 Enemies[ContSpawns].GetComponent<Animator>().SetInteger("Pattern", nowPattern);
@@ -81,6 +114,20 @@ public class Enemycontroller : MonoBehaviour {
             pauseTimer--;
     }
 
+    public static void SetCombo()
+    {
+        ComboTimeCnt = 0;
+
+        GameObject gameController = GameObject.FindGameObjectWithTag("GameController");
+
+        gameController.GetComponent<GameController>().combo += 1;
+
+        int combo = gameController.GetComponent<GameController>().combo;
+
+        int score = 100 * (1 + combo / 10);
+
+        gameController.GetComponent<GameController>().score += score;
+    }
 
     /*
     private static int ActiveEnemyCount;

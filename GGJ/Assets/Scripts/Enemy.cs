@@ -19,13 +19,13 @@ public class Enemy : MonoBehaviour {
 
     private const string ENEMY_TAG = "Enemy";
 
-    private const float TIME_FROM_EXPLOSION_TO_CHAIN = 0.2f;
+    private const float TIME_FROM_EXPLOSION_TO_CHAIN = 0.05f;
 
-    private const float TIME_FROM_EXPLOSION_TO_DEATH = 1.0f;
+    private const float TIME_FROM_EXPLOSION_TO_DEATH = 0.1f;
 
     private const int SURVIVAL_HOURS_WITHOUT_SCREEN = 300;
 
-    private bool bombedFlag;
+    public bool bombedFlag;
 
     private bool chainExplosion;
 
@@ -56,9 +56,11 @@ public class Enemy : MonoBehaviour {
 
             float radius = this.GetComponent<CircleCollider2D>().radius;
 
-            this.GetComponent<CircleCollider2D>().radius = radius * explosionScale;
+            this.GetComponent<CircleCollider2D>().radius = 0.5f * explosionScale;
 
             StartCoroutine("processAfterBombed");
+
+            collider.gameObject.SetActive(false);
         }
     }
 
@@ -104,12 +106,34 @@ public class Enemy : MonoBehaviour {
 
     private IEnumerator processAfterBombed()
     {
-        this.gameObject.SetActive(false);
-        ExplosionParticlePtr = Instantiate(ExplosionParticle, this.gameObject.transform.position, Quaternion.Euler(180,0,0));
-        Destroy(ExplosionParticlePtr, ExplosionParticlePtr.GetComponent<ParticleSystem>().main.duration);
-        yield return new WaitForSeconds(TIME_FROM_EXPLOSION_TO_CHAIN);
+        ////this.gameObject.SetActive(false);
+        ////ExplosionParticlePtr = Instantiate(ExplosionParticle, this.gameObject.transform.position, Quaternion.Euler(180, 0, 0));
+        ////Destroy(ExplosionParticlePtr, ExplosionParticlePtr.GetComponent<ParticleSystem>().main.duration);
+        ////yield return new WaitForSeconds(TIME_FROM_EXPLOSION_TO_CHAIN);
+
+        ////bombedFlag = true;
+        
+        ExplosionParticlePtr = Instantiate(ExplosionParticle, this.gameObject.transform.position + new Vector3(0,0,-1.0f), Quaternion.Euler(0, 0, 0));
+        Destroy(ExplosionParticlePtr, 1.0f);
+         yield return new WaitForSeconds(TIME_FROM_EXPLOSION_TO_CHAIN);
 
         bombedFlag = true;
+
+        yield return new WaitForSeconds(TIME_FROM_EXPLOSION_TO_DEATH);
+
+        this.GetComponent<CircleCollider2D>().radius = 0.5f;
+
+        bombedFlag = false;
+        chainExplosion = false;
+
+        Enemycontroller.SetCombo();
+
+
+
+        this.gameObject.SetActive(false);
+
+
+
 
         //yield return new WaitForSeconds(TIME_FROM_EXPLOSION_TO_DEATH);
 

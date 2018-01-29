@@ -33,7 +33,7 @@ public class ScoreController : MonoBehaviour {
             rankView.sprite = ranks[0];
         else if (score >= 10000)
             rankView.sprite = ranks[1];
-        else if (score >= 1000)
+        else if (score >= 100)
             rankView.sprite = ranks[2];
         else 
             rankView.sprite = ranks[3];

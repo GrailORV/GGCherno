@@ -7,6 +7,8 @@ public class BossWeakPoint : MonoBehaviour {
     [SerializeField]
     private GameObject BossEnemyObj;
 
+    private const string ENEMY_TAG = "Enemy";
+
     // Use this for initialization
     void Start () {
 
@@ -16,4 +18,15 @@ public class BossWeakPoint : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    private void OnTriggerStay2D(Collider2D collider)
+    {
+        if(collider.gameObject.tag==ENEMY_TAG)
+        {
+            if(collider.GetComponent<Enemy>().bombedFlag)
+            {
+                BossEnemyObj.GetComponent<BossEnemy>().SetDamageFromExplosion();
+            }
+        }
+    }
 }

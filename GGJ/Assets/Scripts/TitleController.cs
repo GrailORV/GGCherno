@@ -104,6 +104,11 @@ public class TitleController : MonoBehaviour
         fade.Start(Fade.FADE_STATUS.FADE_OUT, 1.0f, "Prologue");
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
     private void ChooseOption()
     {
         if (Input.GetAxis("SelectRight") > 0.8f && !operate)
