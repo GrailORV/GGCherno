@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LogoController : MonoBehaviour {
+    [RuntimeInitializeOnLoadMethod]
+    static void OnRuntimeMethodLoad()
+    {
+        Screen.SetResolution(768, 1024, false, 60);
+    }
+
 
     [SerializeField]
     Fade fade;
